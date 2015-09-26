@@ -7,7 +7,7 @@ Introducing Ola HWA.(Hackathon Winning App), which includes the best features wh
 The latest iteration of the ever-awesome Ola app includes features like,
 
 ##OlaWear
-Book a cab without taking out your phone! Just Say “Ok Google, Book me a cab” to your Android Wear smartwatch and have your cab pick you up!
+Book a cab without taking out your phone! Just Say **“Ok Google, Book me a cab”** to your Android Wear smartwatch and have your cab pick you up!
 ##OlaStats
 Always wondered if how much you travel in Ola? Enough to ditch your own vehicle? Use OlaStats to find your riding spendings. Icing on the cake? Earn points for each kilometers you ride and the high-scorers get a price per week!
 ##OlaJAM-Ride
@@ -19,5 +19,6 @@ Use Ola daily at the same time and place? Schedule cabs to pick you up and have 
 ##OlaShare
 Splitting bills when at a restraunt? Why stop there? Share your cabs with friends and split the share within the ola app. They pay their share, you pay yours. Sharing is caring :)
 
->*PS :* Some of these features are built using our custom API which interacts with the Ola API to make the best use of it.
->In case if you want to take a look at it, [Here it is](https://github.com/Cepheuen/OLA-HWA)
+
+>*PS : Some of these features are built using our custom API which interacts with the Ola API to make the best use of it.
+>In case if you want to take a look at it, [Here it is](https://github.com/Cepheuen/OLA-HWA)*
