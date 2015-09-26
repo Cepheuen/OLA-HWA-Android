@@ -19,5 +19,5 @@ Use Ola daily at the same time and place? Schedule cabs to pick you up and have 
 ##OlaShare
 Splitting bills when at a restraunt? Why stop there? Share your cabs with friends and split the share within the ola app. They pay their share, you pay yours. Sharing is caring :)
 
-
-
+>*PS :* Some of these features are built using our custom API which interacts with the Ola API to make the best use of it.
+>In case if you want to take a look at it, [Here it is](https://github.com/Cepheuen/OLA-HWA)
