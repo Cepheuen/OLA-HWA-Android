@@ -1,5 +1,6 @@
 package com.cepheuen.olahwa.api;
 
+import com.cepheuen.olahwa.models.DashboardModel;
 import com.cepheuen.olahwa.models.MusicListModel;
 
 import retrofit.RestAdapter;
@@ -31,6 +32,9 @@ public class OlaExtAPI {
 
         @GET("/fetchMusic")
         MusicListModel[] fetchMusic();
+
+        @GET("/leaderboard")
+        DashboardModel[] fetchLeaderboard();
 
         @FormUrlEncoded
         @POST("/createPlaylist")

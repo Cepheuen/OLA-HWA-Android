@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cepheuen.olahwa.R;
 import com.cepheuen.olahwa.adapters.MusicListAdapter;
@@ -55,13 +56,14 @@ public class MusicFragment extends Fragment {
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
         exclm = (TextView) view.findViewById(R.id.exMsg);
 
-        if (connectionDetector.isConnectionAvailable()) {
+        if (!connectionDetector.isConnectionAvailable()) {
             noCRN.setVisibility(View.VISIBLE);
             progressBar.setVisibility(View.INVISIBLE);
             exclm.setText("No Internet Connection!");
             setHasOptionsMenu(false);
         } else if (Prefs.with(getActivity()).getString("crn", null) == null) {
             noCRN.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.INVISIBLE);
             setHasOptionsMenu(false);
         } else {
             noCRN.setVisibility(View.INVISIBLE);
@@ -107,10 +109,30 @@ public class MusicFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (!connectionDetector.isConnectionAvailable()) {
+            noCRN.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.INVISIBLE);
+            exclm.setText("No Internet Connection!");
+            setHasOptionsMenu(false);
+        } else if (Prefs.with(getActivity()).getString("crn", null) == null) {
+            noCRN.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.INVISIBLE);
+            setHasOptionsMenu(false);
+        } else {
+            noCRN.setVisibility(View.INVISIBLE);
+            new FetchMusicList().execute();
+            setHasOptionsMenu(true);
+        }
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_done:
                 musicRequestModel = musicListAdapter.getFinalList();
+                Toast.makeText(getActivity(), "Sent!", Toast.LENGTH_LONG).show();
                 break;
         }
         return true;

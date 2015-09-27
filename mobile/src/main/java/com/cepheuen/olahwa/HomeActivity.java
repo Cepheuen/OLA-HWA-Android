@@ -1,15 +1,18 @@
 package com.cepheuen.olahwa;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.cepheuen.olahwa.fragments.BookingFragment;
 import com.cepheuen.olahwa.fragments.CronFragment;
+import com.cepheuen.olahwa.fragments.DashFragment;
 import com.cepheuen.olahwa.fragments.MusicFragment;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.materialdrawer.AccountHeader;
@@ -26,8 +29,12 @@ public class HomeActivity extends AppCompatActivity {
     private IProfile profile = new ProfileDrawerItem().withName("Bruce Wayne").withEmail("bruce@wayne.com").withIcon(R.drawable.profile6).withIdentifier(105).withSelectedColorRes(R.color.dark_grey);
     private AccountHeader headerResult;
     private Drawer result = null;
-    private FragmentTransaction ft;
     private int currentID = 1;
+    private BookingFragment bookingFragment;
+    private CronFragment cronFragment;
+    private MusicFragment musicFragment;
+    private DashFragment dashFragment;
+    private Fragment currentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +44,10 @@ public class HomeActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ft = getSupportFragmentManager().beginTransaction();
+        bookingFragment = BookingFragment.newInstance();
+        cronFragment = CronFragment.newInstance();
+        musicFragment = MusicFragment.newInstance();
+        dashFragment = DashFragment.newInstance();
 
         headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
@@ -45,6 +55,8 @@ public class HomeActivity extends AppCompatActivity {
                 .addProfiles(profile)
                 .withSavedInstance(savedInstanceState)
                 .build();
+
+        addFragmentsToFrame();
 
         result = new DrawerBuilder()
                 .withActivity(this)
@@ -69,23 +81,22 @@ public class HomeActivity extends AppCompatActivity {
                                 if (drawerItem.getIdentifier() == 5) {
                                     currentID = 5;
                                     getSupportActionBar().setTitle("OlaJam");
-                                    ft.add(R.id.container, MusicFragment.newInstance()).commit();
+                                    switchTo(musicFragment, "Music");
                                 } else if (drawerItem.getIdentifier() == 1) {
                                     currentID = 1;
                                     getSupportActionBar().setTitle("Dashboard");
-                                    // ft.replace(R.id.container, MusicFragment.newInstance());
+                                    switchTo(dashFragment, "Dashboard");
                                 } else if (drawerItem.getIdentifier() == 2) {
                                     currentID = 2;
                                     getSupportActionBar().setTitle("Book");
-                                    ft.add(R.id.container, BookingFragment.newInstance()).commit();
+                                    switchTo(bookingFragment, "Book");
                                 } else if (drawerItem.getIdentifier() == 3) {
                                     currentID = 3;
                                     getSupportActionBar().setTitle("OlaCron");
-                                    ft.add(R.id.container, CronFragment.newInstance()).commit();
+                                    switchTo(cronFragment, "Cron");
                                 } else if (drawerItem.getIdentifier() == 4) {
                                     currentID = 4;
-                                    getSupportActionBar().setTitle("OlaUnite");
-                                    //ft.replace(R.id.container, MusicFragment.newInstance());
+                                    Toast.makeText(HomeActivity.this, "Sorry, feature still under development!", Toast.LENGTH_LONG).show();
                                 }
                             }
                         }
@@ -95,6 +106,43 @@ public class HomeActivity extends AppCompatActivity {
                 })
                 .build();
     }
+
+    private void addFragmentsToFrame() {
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.container, musicFragment, "Music")
+                .hide(musicFragment)
+                .add(R.id.container, cronFragment, "Cron")
+                .hide(cronFragment)
+                .add(R.id.container, bookingFragment, "Booking")
+                .hide(bookingFragment)
+                .add(R.id.container, dashFragment, "Dashboard")
+                .commit();
+        currentFragment = dashFragment;
+    }
+
+    public void switchTo(Fragment fragment, String name) {
+        if (fragment.isVisible())
+            return;
+        FragmentTransaction t = getSupportFragmentManager().beginTransaction();
+        t.setCustomAnimations(R.anim.frag_slide_in,
+                R.anim.frag_slide_out);
+
+        // Make sure the next view is below the current one
+        fragment.getView().bringToFront();
+        // And bring the current one to the very top
+        currentFragment.getView().bringToFront();
+
+        // Hide the current fragment
+        t.show(fragment);
+        t.hide(currentFragment);
+        currentFragment = fragment;
+
+        if (name.equals("Dashboard")) {
+            t.addToBackStack(null);
+        }
+        t.commit();
+    }
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

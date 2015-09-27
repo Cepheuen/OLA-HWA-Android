@@ -70,7 +70,7 @@ public class CabListAdapter extends BaseAdapter {
         if (categories.get(position).getFareBreakup() != null) {
             viewHolder.carExtra.setText("Base Fare : ₹" + categories.get(position).getFareBreakup().get(0).getBaseFare());
             if (categories.get(position).getFareBreakup().get(0).getSurcharge() != null) {
-                viewHolder.carExtra.setText(viewHolder.carExtra.getText() + " | Surcharge:" + categories.get(position).getFareBreakup().get(0).getSurcharge().get(0).getValue() + "x");
+                viewHolder.carExtra.setText(viewHolder.carExtra.getText() + " | Surcharge : " + categories.get(position).getFareBreakup().get(0).getSurcharge().get(0).getValue() + "x");
             }
         } else {
             viewHolder.carExtra.setText("N/A");
