@@ -38,7 +38,7 @@ public class MusicListAdapter extends BaseAdapter {
         return musicListModels.length;
     }
 
-    public MusicRequestModel getMusicListModels() {
+    public MusicRequestModel getFinalList() {
         MusicRequestModel musicRequestModel = new MusicRequestModel();
         List<MusicListModel> finalList = new ArrayList<>();
 
@@ -68,6 +68,7 @@ public class MusicListAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(context).inflate(R.layout.list_item, null);
             viewHolder.songName = (TextView) convertView.findViewById(R.id.song_name);
             viewHolder.checkBox = (CheckBox) convertView.findViewById(R.id.song_check);
+            viewHolder.checkBox.setTag(position);
             convertView.setTag(viewHolder);
             viewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override

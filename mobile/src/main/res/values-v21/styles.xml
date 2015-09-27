@@ -8,9 +8,9 @@
         <item name="android:textColorPrimary">@color/primary_text</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
 
-        <item name="android:statusBarColor">@color/top</item>
+        <item name="android:statusBarColor">@color/primary_dark</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:windowBackground">@color/bg</item>
+        <item name="android:windowBackground">@color/grey</item>
         <item name="android:windowContentTransitions">true</item>
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
