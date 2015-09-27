@@ -17,10 +17,10 @@ public class Category {
     @SerializedName("currency")
     @Expose
     private String currency;
-    @SerializedName("distance_units")
+    @SerializedName("distance_unit")
     @Expose
     private String distanceUnits;
-    @SerializedName("time_units")
+    @SerializedName("time_unit")
     @Expose
     private String timeUnits;
     @SerializedName("eta")

@@ -57,7 +57,7 @@ public class BookingFragment extends Fragment implements LocationListener {
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
         noCRN = view.findViewById(R.id.noCRN);
 
-        if (connectionDetector.isConnectionAvailable()) {
+        if (!connectionDetector.isConnectionAvailable()) {
             noCRN.setVisibility(View.VISIBLE);
             exclm.setText("No Internet Connection!");
         } else {
@@ -111,6 +111,8 @@ public class BookingFragment extends Fragment implements LocationListener {
                 cabListAdapter = new CabListAdapter(getActivity(), baseModel.getCategories());
                 listView.setAdapter(cabListAdapter);
                 listView.setHeaderDividersEnabled(false);
+                listView.setDivider(null);
+                listView.setDividerHeight(20);
             }
         }
     }

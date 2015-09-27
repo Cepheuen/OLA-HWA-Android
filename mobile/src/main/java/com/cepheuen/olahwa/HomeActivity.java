@@ -81,7 +81,7 @@ public class HomeActivity extends AppCompatActivity {
                                 } else if (drawerItem.getIdentifier() == 2) {
                                     currentID = 2;
                                     getSupportActionBar().setTitle("Book");
-                                    ft.replace(R.id.container, BookingFragment.newInstance());
+                                    ft.add(R.id.container, BookingFragment.newInstance()).commit();
                                 } else if (drawerItem.getIdentifier() == 3) {
                                     currentID = 3;
                                     getSupportActionBar().setTitle("OlaCron");
