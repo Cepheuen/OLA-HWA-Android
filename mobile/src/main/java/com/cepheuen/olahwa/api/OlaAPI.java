@@ -39,15 +39,15 @@ public class OlaAPI {
         @Headers("X-APP-TOKEN: 2c623e867c1a4cf39c43a4757a207f08")
         BaseModel rideEstimate(@Query("pickup_lat") String pickup_lat, @Query("pickup_lng") String pickup_lng, @Query("drop_lat") String drop_lat, @Query("drop_lng") String drop_lng, @Query("/category") String category);
 
-        @GET("/booking/create")
+        @GET("/bookings/create")
         @Headers({"X-APP-TOKEN: 2c623e867c1a4cf39c43a4757a207f08", "Authorization: Bearer 631404119bfc4097b6aac95ce160933c"})
-        BookingResponseModel bookRide(@Query("pickup_lat") String pickup_lat, @Query("pickup_lng") String pickup_lng, @Query("/category") String category);
+        BookingResponseModel bookRide(@Query("pickup_lat") String pickup_lat, @Query("pickup_lng") String pickup_lng, @Query("pickup_mode") String pickup_mode ,@Query("category") String category);
 
-        @GET("/booking/track_ride")
+        @GET("/bookings/track_ride")
         @Headers({"X-APP-TOKEN: 2c623e867c1a4cf39c43a4757a207f08", "Authorization: Bearer 631404119bfc4097b6aac95ce160933c"})
         TrackCommonModel trackRide();
 
-        @GET("/booking/cancel   ")
+        @GET("/bookings/cancel")
         @Headers({"X-APP-TOKEN: 2c623e867c1a4cf39c43a4757a207f08", "Authorization: Bearer 631404119bfc4097b6aac95ce160933c"})
         TrackCommonModel cancelRide(@Query("crn") String crn);
     }

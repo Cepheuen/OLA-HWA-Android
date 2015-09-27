@@ -19,6 +19,7 @@ import android.view.WindowInsets;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.cepheuen.olahwa.models.BookingResponseModel;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -29,6 +30,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.wearable.Node;
 import com.google.android.gms.wearable.NodeApi;
 import com.google.android.gms.wearable.Wearable;
+import com.google.gson.Gson;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -41,21 +43,34 @@ public class BookActivity extends WearableActivity implements OnMapReadyCallback
     private DotsPageIndicator mPageIndicator;
     private GridViewPager mViewPager;
     private MapFragment mMapFragment;
-    private static final LatLng SYDNEY = new LatLng(12.9499098, 77.6418903);
+    private LatLng POS;
     private GoogleMap mMap;
-
+    private String bookingData;
+    private BookingResponseModel bookingResponseModel;
     private DismissOverlayView mDismissOverlay;
+    private MarkerOptions driverLocation;
+    private Gson gson = new Gson();
+
     final String[][] data = {
-            { "Row 0, Col 0", "Row 0, Col 1", "Row 0, Col 2" },
-            { "Row 1, Col 0", "Row 1, Col 1", "Row 1, Col 2" },
-            { "Row 2, Col 0", "Row 2, Col 1", "Row 2, Col 2" }
+            {"Row 0, Col 0", "Row 0, Col 1", "Row 0, Col 2"},
+            {"Row 1, Col 0", "Row 1, Col 1", "Row 1, Col 2"},
+            {"Row 2, Col 0", "Row 2, Col 1", "Row 2, Col 2"}
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rect_activity_book);
         setAmbientEnabled();
         initApi();
+
+        bookingData = getIntent().getStringExtra("data");
+        if (bookingData != null) {
+            if (!bookingData.equals("")) {
+                bookingResponseModel = gson.fromJson(bookingData, BookingResponseModel.class);
+                POS = new LatLng(bookingResponseModel.getDriverLat(), bookingResponseModel.getDriverLng());
+            }
+        }
 
         final FrameLayout topFrameLayout = (FrameLayout) findViewById(R.id.root_container);
         final FrameLayout mapFrameLayout = (FrameLayout) findViewById(R.id.map_container);
@@ -133,18 +148,11 @@ public class BookActivity extends WearableActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        // Map is ready to be used.
+        driverLocation = new MarkerOptions().position(POS).title((bookingResponseModel.getCrn().equals("1") ? bookingResponseModel.getEta() + " Mins" : bookingResponseModel.getEta() + " Min") +  "(" + bookingResponseModel.getCabNumber() + ")");
         mMap = googleMap;
-
-        // Set the long click listener as a way to exit the map.
         mMap.setOnMapLongClickListener(this);
-
-        // Add a marker with a title that is shown in its info window.
-        mMap.addMarker(new MarkerOptions().position(SYDNEY)
-                .title("ETA 2 mins"));
-
-        // Move the camera to show the marker.
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(SYDNEY, 10));
+        mMap.addMarker(driverLocation);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(POS, 10));
     }
 
     static final class GridPagerAdapter extends FragmentGridPagerAdapter {
@@ -189,6 +197,7 @@ public class BookActivity extends WearableActivity implements OnMapReadyCallback
 
     /**
      * Returns a GoogleApiClient that can access the Wear API.
+     *
      * @param context
      * @return A GoogleApiClient that can make calls to the Wear API
      */
