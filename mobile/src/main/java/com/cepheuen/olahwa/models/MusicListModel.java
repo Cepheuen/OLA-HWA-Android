@@ -22,6 +22,7 @@ public class MusicListModel {
     @Expose
     private String url;
 
+    private boolean selected;
     /**
      * 
      * @return
@@ -110,6 +111,15 @@ public class MusicListModel {
      */
     public void setUrl(String url) {
         this.url = url;
+    }
+
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 
 }

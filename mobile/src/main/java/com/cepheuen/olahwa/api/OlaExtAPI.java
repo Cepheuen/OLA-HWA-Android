@@ -35,7 +35,7 @@ public class OlaExtAPI {
     public interface OlaPublicAPI {
 
         @GET("/fetchMusic")
-        MusicListModel fetchMusic();
+        MusicListModel[] fetchMusic();
 
         @FormUrlEncoded
         @POST("/createPlaylist")

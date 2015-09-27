@@ -1,5 +1,6 @@
 package com.cepheuen.olahwa;
 
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -21,6 +22,7 @@ public class HomeActivity extends AppCompatActivity {
     private AccountHeader headerResult;
     private Drawer result = null;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +30,9 @@ public class HomeActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
 
         headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
