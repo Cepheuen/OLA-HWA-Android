@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cepheuen.olahwa.R;
 import com.cepheuen.olahwa.adapters.CabListAdapter;
@@ -101,7 +102,12 @@ public class BookingFragment extends Fragment implements LocationListener {
 
         @Override
         protected BaseModel doInBackground(Void... voids) {
-            return OlaAPI.getPublicApiService().checkAvailability(String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude()), "sedan");
+            try {
+                return OlaAPI.getPublicApiService().checkAvailability(String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude()), "sedan");
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
         }
 
         @Override
@@ -113,6 +119,10 @@ public class BookingFragment extends Fragment implements LocationListener {
                 listView.setHeaderDividersEnabled(false);
                 listView.setDivider(null);
                 listView.setDividerHeight(20);
+            } else {
+                noCRN.setVisibility(View.VISIBLE);
+                exclm.setText("Server Error!");
+                Toast.makeText(getActivity(), "Server Error.", Toast.LENGTH_LONG).show();
             }
         }
     }

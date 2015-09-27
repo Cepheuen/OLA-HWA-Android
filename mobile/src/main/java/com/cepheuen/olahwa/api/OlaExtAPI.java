@@ -1,16 +1,11 @@
 package com.cepheuen.olahwa.api;
 
-import com.cepheuen.olahwa.models.BaseModel;
-import com.cepheuen.olahwa.models.BookingResponseModel;
 import com.cepheuen.olahwa.models.MusicListModel;
-import com.cepheuen.olahwa.models.TrackCommonModel;
 
 import retrofit.RestAdapter;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
-import retrofit.http.Headers;
 import retrofit.http.POST;
-import retrofit.http.Query;
 
 /**
  * Created by Muthuramakrishan on 12-07-2015.

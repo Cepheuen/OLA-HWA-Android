@@ -10,10 +10,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.cepheuen.olahwa.api.OlaAPI;
-import com.cepheuen.olahwa.models.BaseModel;
 import com.cepheuen.olahwa.models.BookingResponseModel;
-import com.cepheuen.olahwa.utils.AppLocationManager;
-import com.cepheuen.olahwa.utils.GPSTracker;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.wearable.MessageApi;
 import com.google.android.gms.wearable.MessageEvent;
@@ -22,8 +19,6 @@ import com.google.android.gms.wearable.NodeApi;
 import com.google.android.gms.wearable.Wearable;
 import com.google.android.gms.wearable.WearableListenerService;
 import com.google.gson.Gson;
-
-import java.io.UnsupportedEncodingException;
 
 public class ListenerService extends WearableListenerService implements GoogleApiClient.ConnectionCallbacks, LocationListener {
 
@@ -34,8 +29,8 @@ public class ListenerService extends WearableListenerService implements GoogleAp
 
     @Override
     public void onMessageReceived(MessageEvent messageEvent) {
-        Log.d("SDSD", "Call");
-        showToast(messageEvent.getPath());
+        Log.d("Socket Msg", "Call API");
+        showToast(messageEvent.getPath() + " cab now");
         performAction(messageEvent.getPath());
     }
 
@@ -126,7 +121,12 @@ public class ListenerService extends WearableListenerService implements GoogleAp
 
         @Override
         protected BookingResponseModel doInBackground(Void... voids) {
-            return OlaAPI.getPublicApiService().bookRide(String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude()), "NOW" ,"sedan");
+            try {
+                return OlaAPI.getPublicApiService().bookRide(String.valueOf(location.getLatitude()), String.valueOf(location.getLongitude()), "NOW", "sedan");
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
         }
 
         @Override
@@ -134,6 +134,7 @@ public class ListenerService extends WearableListenerService implements GoogleAp
             if (model != null) {
                 sendMessage("/openMap", gson.toJson(model));
             } else {
+                Toast.makeText(ListenerService.this, "Server Error.", Toast.LENGTH_LONG).show();
                 sendMessage("/status", "error");
             }
         }

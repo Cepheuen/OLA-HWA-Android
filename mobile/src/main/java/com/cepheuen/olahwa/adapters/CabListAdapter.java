@@ -5,19 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cepheuen.olahwa.R;
-import com.cepheuen.olahwa.models.BaseModel;
 import com.cepheuen.olahwa.models.Category;
-import com.cepheuen.olahwa.models.MusicListModel;
-import com.cepheuen.olahwa.models.MusicRequestModel;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

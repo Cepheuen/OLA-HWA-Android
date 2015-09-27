@@ -2,13 +2,10 @@ package com.cepheuen.olahwa.service;
 
 import android.content.Intent;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.cepheuen.olahwa.BookActivity;
 import com.cepheuen.olahwa.LoadingActivity;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.wearable.MessageEvent;
-import com.google.android.gms.wearable.Wearable;
 import com.google.android.gms.wearable.WearableListenerService;
 
 import java.io.UnsupportedEncodingException;

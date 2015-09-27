@@ -3,23 +3,17 @@ package com.cepheuen.olahwa.adapters;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.SweepGradient;
-import android.text.Editable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.cepheuen.olahwa.R;
-import com.cepheuen.olahwa.models.Category;
 import com.cepheuen.olahwa.models.CronModel;
-import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
 import java.util.List;
@@ -80,12 +74,10 @@ public class CronAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        Log.d("SADASDASDASD", cronModels.get(position).getDays());
         String regex = "^[\u0400-\u04FFa-zA-Z ]+(,[\u0400-\u04FFa-zA-Z ]+)*$";
         if (cronModels.get(position).getDays() != null && !cronModels.get(position).getDays().contains("[") && cronModels.get(position).getDays().matches(regex)) {
-            String[] texts = cronModels.get(position).getDays().replace(" ","").split(",");
+            String[] texts = cronModels.get(position).getDays().replace(" ", "").split(",");
             for (String text : texts) {
-                Log.d("Sllele", text);
                 ((TextView) convertView.findViewWithTag(text)).setTextColor(Color.parseColor("#448AFF"));
             }
         }

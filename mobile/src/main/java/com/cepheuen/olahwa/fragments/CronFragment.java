@@ -25,10 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cepheuen.olahwa.R;
-import com.cepheuen.olahwa.adapters.CabListAdapter;
 import com.cepheuen.olahwa.adapters.CronAdapter;
-import com.cepheuen.olahwa.api.OlaAPI;
-import com.cepheuen.olahwa.models.BaseModel;
 import com.cepheuen.olahwa.models.CronModel;
 import com.cepheuen.olahwa.utils.ConnectionDetector;
 import com.cepheuen.olahwa.utils.Prefs;

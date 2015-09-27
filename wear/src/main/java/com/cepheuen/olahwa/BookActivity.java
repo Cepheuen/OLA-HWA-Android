@@ -1,23 +1,18 @@
 package com.cepheuen.olahwa;
 
-import android.app.Activity;
-import android.content.Context;
-import android.os.Bundle;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.support.v4.app.FragmentActivity;
+import android.content.Context;
+import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.CardFragment;
 import android.support.wearable.view.DismissOverlayView;
 import android.support.wearable.view.DotsPageIndicator;
 import android.support.wearable.view.FragmentGridPagerAdapter;
-import android.support.wearable.view.GridPagerAdapter;
 import android.support.wearable.view.GridViewPager;
-import android.support.wearable.view.WatchViewStub;
 import android.view.View;
 import android.view.WindowInsets;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import com.cepheuen.olahwa.models.BookingResponseModel;
 import com.google.android.gms.common.api.GoogleApiClient;

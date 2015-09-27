@@ -4,6 +4,7 @@
     tools:context=".BaseActivity">
     <item
         android:id="@+id/action_done"
+        android:icon="@drawable/ic_check"
         android:orderInCategory="100"
         android:title="Done"
         app:showAsAction="always" />

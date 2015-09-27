@@ -1,6 +1,5 @@
 package com.cepheuen.olahwa.fragments;
 
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -58,6 +57,7 @@ public class MusicFragment extends Fragment {
 
         if (connectionDetector.isConnectionAvailable()) {
             noCRN.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.INVISIBLE);
             exclm.setText("No Internet Connection!");
             setHasOptionsMenu(false);
         } else if (Prefs.with(getActivity()).getString("crn", null) == null) {
