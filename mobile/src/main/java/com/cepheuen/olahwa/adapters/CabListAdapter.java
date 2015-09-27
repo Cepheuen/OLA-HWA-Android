@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Thank bunny app
  * Created by Muthuramakrishnan on 9/27/2015.
  */
 public class CabListAdapter extends BaseAdapter {

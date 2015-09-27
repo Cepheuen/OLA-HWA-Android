@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.cepheuen.olahwa.fragments.BookingFragment;
+import com.cepheuen.olahwa.fragments.CronFragment;
 import com.cepheuen.olahwa.fragments.MusicFragment;
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.materialdrawer.AccountHeader;
@@ -85,7 +86,7 @@ public class HomeActivity extends AppCompatActivity {
                                 } else if (drawerItem.getIdentifier() == 3) {
                                     currentID = 3;
                                     getSupportActionBar().setTitle("OlaCron");
-                                    //ft.replace(R.id.container, MusicFragment.newInstance());
+                                    ft.add(R.id.container, CronFragment.newInstance()).commit();
                                 } else if (drawerItem.getIdentifier() == 4) {
                                     currentID = 4;
                                     getSupportActionBar().setTitle("OlaUnite");
